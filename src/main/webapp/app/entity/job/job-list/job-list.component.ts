@@ -60,6 +60,6 @@ export class JobListComponent implements OnInit {
   }
 
   random() {
-    return Math.floor(Math.random() * 4) + 1;
+    return Math.floor(Math.random() * 5) + 1;
   }
 }
