@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserRoleRouteAccess } from '@app/core/auth/user-role-route-access';
 import { UserRouteAccessService } from '@app/core/auth/user-route-access-service';
 import { JobCrudComponent } from './job-crud/job-crud.component';
 import { JobListComponent } from './job-list/job-list.component';
@@ -14,7 +15,8 @@ const routes: Routes = [
     children: [
       {
         path: 'add',
-        component: JobCrudComponent
+        component: JobCrudComponent,
+        canActivate: [UserRoleRouteAccess]
       },
       {
         path: 'list',

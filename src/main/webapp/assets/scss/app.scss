@@ -204,3 +204,11 @@ input {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+
+.mat-paginator-icon {
+	transform: rotate(180deg);
+	width: 28px;
+	fill: currentColor
+  }
+

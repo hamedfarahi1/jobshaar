@@ -1,6 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JobService } from '@app/core/service/job/job-service';
 import { JobKeyValue } from '@app/shared/shared-common/key-value/job-key-value';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -77,7 +78,8 @@ export class JobCrudComponent implements OnInit {
   })
   constructor(
     jobKeyValues: JobKeyValue,
-    private jobService: JobService
+    private jobService: JobService,
+    private router: Router
   ) {
     jobKeyValues.getCategoryTypes().subscribe(
       res => this.categoryTypes = res
@@ -93,6 +95,8 @@ export class JobCrudComponent implements OnInit {
   ngOnInit(): void { }
 
   submit() {
-    this.jobService.add(this.jobForm.value).subscribe(() => { }, error => console.log(error));
+    this.jobService.add(this.jobForm.value).subscribe(() => {
+      this.router.navigate(['job', 'list']);
+    }, error => console.log(error));
   }
 }
