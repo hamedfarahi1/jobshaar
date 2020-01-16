@@ -59,7 +59,7 @@ export class JobListComponent implements OnInit {
     return '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
   }
 
-  random() {
-    return Math.floor(Math.random() * 5) + 1;
+  charAt_0(id: number) {
+    return id % 5 + 1;
   }
 }
