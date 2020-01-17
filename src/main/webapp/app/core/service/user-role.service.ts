@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from 'ngx-webstorage';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AccountService } from '../auth/account.service';
@@ -11,7 +12,8 @@ export class UserRoleService {
   private _isEmployer: boolean = false;
 
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private $localStorage: LocalStorageService
   ) {
     accountService.get().subscribe(res => {
       let user = res.body;
@@ -36,11 +38,21 @@ export class UserRoleService {
 
   public isEmployerObv(): Observable<boolean> {
     let role = this.userRole;
-    if (role !== 'employee' && role !== 'employer')
+    if (role === 'employee' || role === 'employer') {
+      this._isEmployer = role === 'employer';
+      return of(this.isEmployer);
+    }
+    role = this.$localStorage.retrieve('role');
+    if (role === 'employee' || role === 'employer') {
+      this._isEmployer = role === 'employer';
+      return of(this.isEmployer);
+    }
+    else
       return this.accountService.get().pipe(
         map(res => {
           if (res.body && res.body.role)
             role = res.body.role.toLowerCase();
+          this.$localStorage.store('role', role);
           this._isEmployer = role === 'employer';
           return this.isEmployer;
         },
@@ -48,9 +60,5 @@ export class UserRoleService {
             return of(false);
           }))
       )
-    else {
-      this._isEmployer = role === 'employer';
-      return of(this.isEmployer);
-    }
   }
 }
