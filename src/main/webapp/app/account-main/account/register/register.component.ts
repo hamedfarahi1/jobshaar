@@ -76,7 +76,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  submit() {
+  submit(type: number) {
+    this.isEmployer = type == 0;
     this.accountService.register(this.credentials.value, this.isEmployer).subscribe(() => {
       if (this.isEmployer)
         this.router.navigate(['account', 'register'], { queryParams: { step: 2 } })

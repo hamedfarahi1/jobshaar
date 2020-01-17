@@ -29,15 +29,16 @@
       </form>
     </div>
     <div class="top-px-double">
-      <button color="accent" (click)="login()" style="width: 100%;" [disabled]="!credentials.valid"
+      <button color="accent" (click)="login(group.value)" style="width: 100%;" [disabled]="!credentials.valid"
         mat-raised-button>ورود</button>
     </div>
     <div class="register">
       <a routerLink="../register">ثبت نام
       </a>
     </div>
-    <mat-checkbox [(ngModel)]="isEmployer">
-      <span class="as-employer">ورود کارفرما</span>
-    </mat-checkbox>
+    <mat-button-toggle-group style="width: 100%; margin-top: 40px" #group="matButtonToggleGroup" value="1">
+      <mat-button-toggle style="width: 100%;" value="0">ورود کارفرما</mat-button-toggle>
+      <mat-button-toggle style="width: 100%;" value="1">ورود کارجو</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
 </ng-template>

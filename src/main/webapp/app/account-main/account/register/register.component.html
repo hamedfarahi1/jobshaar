@@ -45,17 +45,16 @@
       </form>
     </div>
     <div class="top-px-double">
-      <button color="accent" style="width: 100%;" (click)="submit()" [disabled]="!credentials.valid"
+      <button color="accent" style="width: 100%;" (click)="submit(group.value)" [disabled]="!credentials.valid"
         mat-raised-button>ثبت نام</button>
     </div>
     <div class="login">
       <a routerLink="../login">ورود</a>
     </div>
-    <mat-checkbox [(ngModel)]="isEmployer">
-      <span class="as-employer">
-        ثبت نام کارفرما
-      </span>
-    </mat-checkbox>
+    <mat-button-toggle-group style="width: 100%; margin-top: 40px" #group="matButtonToggleGroup" value="1">
+      <mat-button-toggle style="width: 100%;" value="0">ورود کارفرما</mat-button-toggle>
+      <mat-button-toggle style="width: 100%;" value="1">ورود کارجو</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
 </ng-template>
 

@@ -41,7 +41,8 @@ export class LoginComponent implements AfterContentInit {
       ))
   }
 
-  login(): void {
+  login(type: number): void {
+    this.isEmployer = type == 0;
     const formPeropery: ICredentials = this.credentials.value;
     this.loginService
       .login(this.isEmployer, {

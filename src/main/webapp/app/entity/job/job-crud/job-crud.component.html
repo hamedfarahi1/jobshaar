@@ -3,7 +3,7 @@
     <div class="header"></div>
     <form [formGroup]="jobForm">
       <div class="form-container">
-        <div class="row-1">
+        <div class="row-1 desktop-view">
           <div>
             <span>
               زمینه شغلی:
@@ -17,6 +17,32 @@
             </mat-form-field>
           </div>
           <div style="margin-right: 20px;">
+            <span>
+              بازه زمانی:
+            </span>
+            <mat-form-field>
+              <mat-select [(ngModel)]="selected[1]" formControlName="cooperationType">
+                <mat-option *ngFor="let item of cooperationTypes" [value]="item.key">
+                  {{ item.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row-1 mobile mobile-view">
+          <div>
+            <span>
+              زمینه شغلی:
+            </span>
+            <mat-form-field>
+              <mat-select [(ngModel)]="selected[0]" formControlName="categoryType">
+                <mat-option *ngFor="let item of categoryTypes" [value]="item.key">
+                  {{ item.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
             <span>
               بازه زمانی:
             </span>
