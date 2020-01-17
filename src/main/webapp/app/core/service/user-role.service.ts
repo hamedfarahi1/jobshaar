@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { AccountService } from '../auth/account.service';
 
 @Injectable({
@@ -9,7 +11,7 @@ export class UserRoleService {
   private _isEmployer: boolean = false;
 
   constructor(
-    accountService: AccountService
+    private accountService: AccountService
   ) {
     accountService.get().subscribe(res => {
       let user = res.body;
@@ -30,5 +32,25 @@ export class UserRoleService {
 
   public get isEmployer(): boolean {
     return this._isEmployer;
+  }
+
+  public isEmployerObv(): Observable<boolean> {
+    let role = this.userRole;
+    if (role !== 'employee' && role !== 'employer')
+      return this.accountService.get().pipe(
+        map(res => {
+          if (res.body && res.body.role)
+            role = res.body.role.toLowerCase();
+          this._isEmployer = role === 'employer';
+          return this.isEmployer;
+        },
+          catchError((err) => {
+            return of(false);
+          }))
+      )
+    else {
+      this._isEmployer = role === 'employer';
+      return of(this.isEmployer);
+    }
   }
 }
