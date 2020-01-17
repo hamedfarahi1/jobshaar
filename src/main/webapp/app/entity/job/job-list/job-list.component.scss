@@ -1,6 +1,7 @@
 .container {
+  margin: auto;
   display: flex;
-  width: 100%;
+  width: 80%;
 }
 
 .container-mobile {
@@ -19,6 +20,7 @@
 
 .mobile {
   width: 100% !important;
+  margin-top: 2%;
   padding: unset !important;
 }
 
@@ -38,7 +40,6 @@
   margin-right: auto;
   width: 75%;
   padding-top: 9%;
-
 }
 
 .tile-container {
@@ -67,7 +68,6 @@
 
 .company-detail {
   margin-right: 10px;
-
 }
 
 .company-title {
@@ -101,6 +101,9 @@
   color: white;
 }
 
+.resume-btn-title-mobile {
+  font-size: x-small;
+}
 
 .paginator {
   margin: auto;
