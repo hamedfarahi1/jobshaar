@@ -104,6 +104,7 @@ export class AuthServerProvider {
     return new Observable(observer => {
       this.$localStorage.clear('authenticationToken');
       this.$sessionStorage.clear('authenticationToken');
+      this.$localStorage.clear('role');
       observer.complete();
     });
   }

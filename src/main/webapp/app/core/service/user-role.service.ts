@@ -56,7 +56,7 @@ export class UserRoleService {
           this._isEmployer = role === 'employer';
           return this.isEmployer;
         },
-          catchError((err) => {
+          catchError(() => {
             return of(false);
           }))
       )
